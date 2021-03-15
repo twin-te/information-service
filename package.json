@@ -40,6 +40,8 @@
     "clone": "^2.1.2",
     "cross-env": "^7.0.3",
     "log4js": "^6.3.0",
-    "protobufjs": "github:iFwu/protobuf.js"
+    "pg": "^8.5.1",
+    "protobufjs": "github:iFwu/protobuf.js",
+    "typeorm": "^0.2.31"
   }
 }
