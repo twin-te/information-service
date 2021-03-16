@@ -42,5 +42,6 @@ services:
     container_name: postgres-container
     environment:
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: twinte_information_service
     volumes:
       - ./initdb/init.sql:/docker-entrypoint-initdb.d/init.sql
