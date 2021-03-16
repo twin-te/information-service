@@ -1,0 +1,15 @@
+syntax="proto3";
+
+service InformationService {
+  rpc addInformation(AddInformationRequest) returns (AddInformationResponse);
+}
+
+message AddInformationRequest {
+  string title = 1;
+  string content = 2;
+  string published_at = 3;
+}
+
+message AddInformationResponse {
+  string text = 1;
+}

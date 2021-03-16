@@ -8,11 +8,11 @@ import { information } from './model/info'
  */
 export async function connectDatabase() {
   const config = {
-    host: process.env.PG_HOST ?? 'localhost',
+    host: process.env.PG_HOST ?? '172.18.0.3',
     port: parseInt(process.env.PG_PORT ?? '5432'),
     username: process.env.PG_USERNAME ?? 'postgres',
     password: process.env.PG_PASSWORD ?? 'postgres',
-    database: process.env.PG_DATABASE ?? 'twinte_school_information_service',
+    database: process.env.PG_DATABASE ?? 'twinte_information_service',
   }
 
   logger.debug('postgres config', { ...config, password: '*****' })
