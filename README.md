@@ -8,7 +8,7 @@ typescript & grpc
 | ADMIN_USER | 権限を持たせるユーザーID           | なし                   |
 | PG_HOST     | Postgres接続先のホスト名         | postgres              |
 | PG_PORT     | Postgres接続先のポート番号       | 5432                  |
-| PG_DATABASE | Postgres接続先のデータベース名   | twinte_course_service |
+| PG_DATABASE | Postgres接続先のデータベース名   | twinte_information_service |
 | PG_USER     | Postgres接続に使用するユーザー名 | postgres              |
 | PG_PASSWORD | Postgres接続に使用するパスワード | postgres              |
 | LOG_LEVEL   | ログレベル fatal / error / warn / info / debug / trace / off | info      
