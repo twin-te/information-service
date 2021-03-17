@@ -15,5 +15,5 @@ jobs:
         working-directory: .devcontainer
         run: |
           touch .env
-          echo 'ADMIN_USER=${{ secrets.ADMIN_USER }}' >> .env
+          echo 'ADMIN_USER=te_twin' >> .env
           docker-compose exec -T node bash -c "yarn test"
