@@ -1,23 +1,34 @@
 import {
   InformationService,
-  AddInformationResponse,
   ListInformationResponse,
   information,
   GetInformationResponse,
+  AdminListInformationResponse,
 } from '../../generated'
 import { Status } from '@grpc/grpc-js/build/src/constants'
 import { GrpcServer } from './type'
 import { toGrpcError } from './converter'
 import dayjs, { Dayjs } from 'dayjs'
-
 import { addInfoUseCase } from '../usecase/addInfo'
-import { listInfoUseCase, getInfoUseCase } from '../usecase/getInfo'
-
+import {
+  listInfoUseCase,
+  getInfoUseCase,
+  adminListInfoUseCase,
+} from '../usecase/getInfo'
+import { removeInfoUseCase } from '../usecase/removeInfo'
 import { information as DBInformation } from '../database/model/info'
+import dotenv from 'dotenv'
+dotenv.config()
 
 export const infomationService: GrpcServer<InformationService> = {
   async addInformation({ request }, callback) {
     try {
+      if (request.user !== process.env.ADMIN_USER) {
+        return callback({
+          code: Status.INVALID_ARGUMENT,
+          message: 'Unauthorized',
+        })
+      }
       let publishedAt: Dayjs
       if (request.publishedAt === '') {
         publishedAt = dayjs()
@@ -25,7 +36,7 @@ export const infomationService: GrpcServer<InformationService> = {
         publishedAt = dayjs(request.publishedAt)
       }
       await addInfoUseCase(request.title, request.content, publishedAt)
-      callback(null, AddInformationResponse.create({ text: 'ジャイアン' }))
+      callback(null)
     } catch (e) {
       callback(toGrpcError(e))
     }
@@ -46,6 +57,36 @@ export const infomationService: GrpcServer<InformationService> = {
       const informationList = await getInfoUseCase(request.limit)
       res.Informations = informationList.map(convertToGrpcStructure)
       callback(null, res)
+    } catch (e) {
+      callback(toGrpcError(e))
+    }
+  },
+  async adminListInformation({ request }, callback) {
+    try {
+      if (request.user !== process.env.ADMIN_USER) {
+        return callback({
+          code: Status.INVALID_ARGUMENT,
+          message: 'Unauthorized',
+        })
+      }
+      const res = new AdminListInformationResponse()
+      const informationList = await adminListInfoUseCase()
+      res.Informations = informationList.map(convertToGrpcStructure)
+      callback(null, res)
+    } catch (e) {
+      callback(toGrpcError(e))
+    }
+  },
+  async removeInformation({ request }, callback) {
+    try {
+      if (request.user !== process.env.ADMIN_USER) {
+        return callback({
+          code: Status.INVALID_ARGUMENT,
+          message: 'Unauthorized',
+        })
+      }
+      await removeInfoUseCase(request.id)
+      callback(null)
     } catch (e) {
       callback(toGrpcError(e))
     }

@@ -24,19 +24,22 @@ beforeAll(async () => {
   ) as unknown) as GrpcClient<InformationService>
 })
 
+// ランダム文字列
+let id:string = ""
+const title = Math.random().toString(32).substring(2)
+const content = Math.random().toString(32).substring(2)
+const user = 'te_twin'
+
 test('greeting success', (done) => {
-  const title = 'たこなす'
-  const content = "ひげろ～！"
-  const publishedAt = "2021-05-03 12:34:56"
-  client.addInformation({ title,content,publishedAt }, (err, res) => {
+  const publishedAt = ""
+  client.addInformation({ user,title,content,publishedAt }, (err, res) => {
     expect(err).toBeNull()
-    expect(res?.text).toEqual(`ジャイアン`)
     done()
   })
 })
 
 test('greeting success', (done) => {
-  const limit = 2;
+  const limit = 1;
   client.getInformation({limit}, (err, res) => {
     expect(err).toBeNull()
     console.log(res);
@@ -44,9 +47,18 @@ test('greeting success', (done) => {
   })
 })
 test('greeting success', (done) => {
-  client.listInformation({}, (err, res) => {
+  client.adminListInformation({user}, (err, res) => {
+    id = res?.Informations[0].id!;
     expect(err).toBeNull()
-    // console.log(res);
+    expect(res?.Informations[0].title).toEqual(title)
+    expect(res?.Informations[0].content).toEqual(content)
+    done()
+  })
+})
+
+test('greeting success', (done) => {
+  client.removeInformation({user,id}, (err, res) => {
+    expect(err).toBeNull()
     done()
   })
 })
