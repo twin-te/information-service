@@ -27,7 +27,7 @@ beforeAll(async () => {
 test('greeting success', (done) => {
   const title = 'たこなす'
   const content = "ひげろ～！"
-  const publishedAt = "2021-10-14 1:54:45"
+  const publishedAt = "2021-05-03 12:34:56"
   client.addInformation({ title,content,publishedAt }, (err, res) => {
     expect(err).toBeNull()
     expect(res?.text).toEqual(`ジャイアン`)
@@ -36,10 +36,17 @@ test('greeting success', (done) => {
 })
 
 test('greeting success', (done) => {
-  const limit = 1;
+  const limit = 2;
   client.getInformation({limit}, (err, res) => {
     expect(err).toBeNull()
     console.log(res);
+    done()
+  })
+})
+test('greeting success', (done) => {
+  client.listInformation({}, (err, res) => {
+    expect(err).toBeNull()
+    // console.log(res);
     done()
   })
 })

@@ -3,25 +3,28 @@ import {
   AddInformationResponse,
   ListInformationResponse,
   information,
-  GetInformationResponse
+  GetInformationResponse,
 } from '../../generated'
 import { Status } from '@grpc/grpc-js/build/src/constants'
 import { GrpcServer } from './type'
 import { toGrpcError } from './converter'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
+
 import { addInfoUseCase } from '../usecase/addInfo'
-import { listInfoUseCase } from '../usecase/getInfo'
-import { getInfoUseCase } from '../usecase/getInfo'
+import { listInfoUseCase, getInfoUseCase } from '../usecase/getInfo'
+
 import { information as DBInformation } from '../database/model/info'
 
 export const infomationService: GrpcServer<InformationService> = {
   async addInformation({ request }, callback) {
     try {
-      await addInfoUseCase(
-        request.title,
-        request.content,
-        dayjs(request.publishedAt)
-      )
+      let publishedAt: Dayjs
+      if (request.publishedAt === '') {
+        publishedAt = dayjs()
+      } else {
+        publishedAt = dayjs(request.publishedAt)
+      }
+      await addInfoUseCase(request.title, request.content, publishedAt)
       callback(null, AddInformationResponse.create({ text: 'ジャイアン' }))
     } catch (e) {
       callback(toGrpcError(e))
@@ -39,13 +42,13 @@ export const infomationService: GrpcServer<InformationService> = {
   },
   async getInformation({ request }, callback) {
     try {
-      const res = new GetInformationResponse;
-      const informationList = await getInfoUseCase(request.limit);
+      const res = new GetInformationResponse()
+      const informationList = await getInfoUseCase(request.limit)
       res.Informations = informationList.map(convertToGrpcStructure)
-        callback(null, res)
-      } catch (e) {
-        callback(toGrpcError(e))
-      }
+      callback(null, res)
+    } catch (e) {
+      callback(toGrpcError(e))
+    }
   },
 }
 
