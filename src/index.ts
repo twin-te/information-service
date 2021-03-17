@@ -9,7 +9,6 @@ async function main() {
   logger.info('starting...')
   await connectDatabase()
   await startGrpcServer()
-  console.log(await getInfoUseCase(2))
 }
 
 main()

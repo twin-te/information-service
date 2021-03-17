@@ -19,7 +19,7 @@ message AddInformationResponse {}
 
 message ListInformationRequest {}
 
-message information{
+message Information{
     string id = 0;
     string title = 1;
     string content = 2;
@@ -27,7 +27,7 @@ message information{
 }
 
 message ListInformationResponse {
-  repeated information Informations = 0;
+  repeated Information Informations = 0;
 }
 
 message GetInformationRequest {
@@ -35,7 +35,7 @@ message GetInformationRequest {
 }
 
 message GetInformationResponse {
-  repeated information Informations = 0;
+  repeated Information Informations = 0;
 }
 
 message AdminListInformationRequest{
@@ -43,7 +43,7 @@ message AdminListInformationRequest{
 }
 
 message AdminListInformationResponse{
-  repeated information Informations = 0;
+  repeated Information Informations = 0;
 }
 
 message RemoveInformationRequest{

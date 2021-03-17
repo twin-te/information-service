@@ -1,7 +1,7 @@
 import {
   InformationService,
   ListInformationResponse,
-  information,
+  Information,
   GetInformationResponse,
   AdminListInformationResponse,
 } from '../../generated'
@@ -41,7 +41,7 @@ export const infomationService: GrpcServer<InformationService> = {
       callback(toGrpcError(e))
     }
   },
-  async listInformation({}, callback) {
+  async listInformation({ request }, callback) {
     try {
       const res = new ListInformationResponse()
       const informationList = await listInfoUseCase()
@@ -93,8 +93,8 @@ export const infomationService: GrpcServer<InformationService> = {
   },
 }
 
-function convertToGrpcStructure(element: DBInformation): information {
-  const gRPCInfo = new information()
+function convertToGrpcStructure(element: DBInformation): Information {
+  const gRPCInfo = new Information()
   gRPCInfo.id = element.id
   gRPCInfo.title = element.title
   gRPCInfo.content = element.content
