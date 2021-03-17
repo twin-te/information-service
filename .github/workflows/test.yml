@@ -14,5 +14,5 @@ jobs:
       - name: run test
         working-directory: .devcontainer
         run: |
-        echo 'ADMIN_USER=${{ secrets.ADMIN_USER }}' >> $GITHUB_ENV
-        docker-compose exec -T node bash -c "yarn test"
+          echo 'ADMIN_USER=${{ secrets.ADMIN_USER }}' >> $GITHUB_ENV
+          docker-compose exec -T node bash -c "yarn test"
