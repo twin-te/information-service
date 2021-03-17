@@ -25,12 +25,21 @@ beforeAll(async () => {
 })
 
 test('greeting success', (done) => {
-  const title = 'Twin:te'
-  const content = "ひげろ～だ～！"
-  const publishedAt = "2020-10-14 1:54:45"
+  const title = 'たこなす'
+  const content = "ひげろ～！"
+  const publishedAt = "2021-10-14 1:54:45"
   client.addInformation({ title,content,publishedAt }, (err, res) => {
     expect(err).toBeNull()
     expect(res?.text).toEqual(`ジャイアン`)
+    done()
+  })
+})
+
+test('greeting success', (done) => {
+  const limit = 1;
+  client.getInformation({limit}, (err, res) => {
+    expect(err).toBeNull()
+    console.log(res);
     done()
   })
 })

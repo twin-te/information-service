@@ -6,7 +6,10 @@ import { logger } from '../logger'
 import { applyLogger } from './logger'
 import { infomationService } from './info.service'
 
-const protoPath = path.resolve(__dirname, `../../protos/InformationService.proto`)
+const protoPath = path.resolve(
+  __dirname,
+  `../../protos/InformationService.proto`
+)
 const serviceName = 'InformationService'
 
 let server: grpc.Server | undefined

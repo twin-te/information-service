@@ -2,10 +2,10 @@ import { StatusObject, Metadata } from '@grpc/grpc-js'
 import { Status } from '@grpc/grpc-js/build/src/constants'
 import { ServerErrorResponse } from '@grpc/grpc-js/build/src/server-call'
 import {
-    NotFoundError,
-    InvalidArgumentError,
-    AlreadyExistError,
-  } from '../error'
+  NotFoundError,
+  InvalidArgumentError,
+  AlreadyExistError,
+} from '../error'
 
 export function toGrpcError(
   e: Error

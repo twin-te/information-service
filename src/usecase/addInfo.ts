@@ -2,18 +2,21 @@ import { Dayjs } from 'dayjs'
 import { getConnection } from 'typeorm'
 import { information } from '../database/model/info'
 
-
-export function addInfo(
+export function addInfoUseCase(
   title: string,
   content: string,
-  published_at: Dayjs,
+  publishedAt: Dayjs
 ) {
   return getConnection()
-  .createQueryBuilder()
-  .insert()
-  .into(information)
-  .values([
-      { title: title, content: content, published_at: published_at.format('YYYY-MM-DD hh:mm:ss') }
-   ])
-  .execute();
+    .createQueryBuilder()
+    .insert()
+    .into(information)
+    .values([
+      {
+        title: title,
+        content: content,
+        published_at: publishedAt.format('YYYY-MM-DD hh:mm:ss'),
+      },
+    ])
+    .execute()
 }

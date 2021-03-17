@@ -2,6 +2,8 @@ syntax="proto3";
 
 service InformationService {
   rpc addInformation(AddInformationRequest) returns (AddInformationResponse);
+  rpc listInformation(ListInformationRequest) returns (ListInformationResponse);
+  rpc getInformation(GetInformationRequest) returns (GetInformationResponse);
 }
 
 message AddInformationRequest {
@@ -13,3 +15,25 @@ message AddInformationRequest {
 message AddInformationResponse {
   string text = 1;
 }
+
+message ListInformationRequest {}
+
+message information{
+    string id = 1;
+    string title = 2;
+    string content = 3;
+    string published_at = 4;
+}
+
+message ListInformationResponse {
+  repeated information Informations = 1;
+}
+
+message GetInformationRequest {
+  int32 limit = 1;
+}
+
+message GetInformationResponse {
+  repeated information Informations = 1;
+}
+
