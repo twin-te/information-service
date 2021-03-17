@@ -20,8 +20,8 @@ services:
     #   context: .
     #   dockerfile: .devcontainer/Dockerfile
     build: ./
-    image: twinte-information-service-dev-image
-    container_name: twinte-information-service-dev-container
+    # image: dev-image
+    # container_name: dev-container
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
       - ../:/workspace:cached
