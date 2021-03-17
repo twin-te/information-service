@@ -2,13 +2,15 @@ import 'reflect-metadata'
 import { createConnection, getConnection } from 'typeorm'
 import { logger } from '../logger'
 import { information } from './model/info'
+import dotenv from 'dotenv'
+dotenv.config()
 
 /**
  * postgresへ接続
  */
 export async function connectDatabase() {
   const config = {
-    host: process.env.PG_HOST ?? '172.18.0.3',
+    host: process.env.PG_HOST ?? 'localhost',
     port: parseInt(process.env.PG_PORT ?? '5432'),
     username: process.env.PG_USERNAME ?? 'postgres',
     password: process.env.PG_PASSWORD ?? 'postgres',
