@@ -13,7 +13,7 @@ jobs:
         run: docker-compose exec -T node bash -c "yarn && yarn proto"
       - name: run test
         working-directory: .devcontainer
-        run: |
-          touch .env
-          echo 'ADMIN_USER=te_twin' >> .env
+        env:
+          ADMIN_USER: te_twin
+        run:
           docker-compose exec -T node bash -c "yarn test"
