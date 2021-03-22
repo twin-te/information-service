@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs'
 import { getConnection } from 'typeorm'
-import { information } from '../database/model/info'
+import { Information } from '../database/model/info'
 
 export function addInfoUseCase(
   title: string,
@@ -10,7 +10,7 @@ export function addInfoUseCase(
   return getConnection()
     .createQueryBuilder()
     .insert()
-    .into(information)
+    .into(Information)
     .values([
       {
         title: title,
