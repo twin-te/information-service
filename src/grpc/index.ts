@@ -4,10 +4,13 @@ import * as protoLoader from '@grpc/proto-loader'
 import path from 'path'
 import { logger } from '../logger'
 import { applyLogger } from './logger'
-import { helloService } from './hello.service'
+import { infomationService } from './info.service'
 
-const protoPath = path.resolve(__dirname, `../../protos/HelloService.proto`)
-const serviceName = 'HelloService'
+const protoPath = path.resolve(
+  __dirname,
+  `../../protos/InformationService.proto`
+)
+const serviceName = 'InformationService'
 
 let server: grpc.Server | undefined
 
@@ -23,7 +26,7 @@ export async function startGrpcServer() {
   return new Promise<void>((resolve, reject) => {
     if (server) reject(new Error('already started'))
     server = new grpc.Server()
-    server.addService(helloServiceDef, applyLogger(helloService))
+    server.addService(helloServiceDef, applyLogger(infomationService))
     server.bindAsync(
       '0.0.0.0:50051',
       grpc.ServerCredentials.createInsecure(),

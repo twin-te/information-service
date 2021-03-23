@@ -1,0 +1,54 @@
+syntax="proto3";
+
+service InformationService {
+  rpc addInformation(AddInformationRequest) returns (AddInformationResponse);
+  rpc listInformation(ListInformationRequest) returns (ListInformationResponse);
+  rpc getInformation(GetInformationRequest) returns (GetInformationResponse);
+  rpc adminListInformation(AdminListInformationRequest) returns (AdminListInformationResponse);
+  rpc removeInformation(RemoveInformationRequest) returns (RemoveInformationResponse);
+}
+
+message AddInformationRequest {
+  string user = 0;
+  string title = 1;
+  string content = 2;
+  string published_at = 3;
+}
+
+message AddInformationResponse {}
+
+message ListInformationRequest {}
+
+message Information{
+    string id = 0;
+    string title = 1;
+    string content = 2;
+    string published_at = 3;
+}
+
+message ListInformationResponse {
+  repeated Information Informations = 0;
+}
+
+message GetInformationRequest {
+  int32 limit = 0;
+}
+
+message GetInformationResponse {
+  repeated Information Informations = 0;
+}
+
+message AdminListInformationRequest{
+  string user = 0;
+}
+
+message AdminListInformationResponse{
+  repeated Information Informations = 0;
+}
+
+message RemoveInformationRequest{
+  string user = 0;
+  string id = 1;
+}
+
+message RemoveInformationResponse{}

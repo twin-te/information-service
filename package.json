@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "cross-env LOG_LEVEL=trace ts-node --files src/index.ts",
     "proto": "./proto-gen.sh",
-    "client": "grpcc -i -a localhost:50051 -p protos/HelloService.proto",
-    "test": "cross-env LOG_LEVEL=off jest --runInBand --coverage",
+    "client": "grpcc -i -a localhost:50051 -p protos/InformationService.proto",
+    "test": "cross-env LOG_LEVEL=off ADMIN_USER=te_twin jest --runInBand --coverage",
     "build": "rm -rf ./dist && tsc && rm -rf ./dist/__tests__ && mv ./dist/src/* ./dist",
     "lint": "eslint src/**/*.ts"
   },
@@ -37,9 +37,15 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.2.2",
     "@grpc/proto-loader": "^0.5.6",
+    "@types/pg": "^7.14.11",
     "clone": "^2.1.2",
     "cross-env": "^7.0.3",
+    "dayjs": "^1.10.4",
+    "dotenv": "^8.2.0",
     "log4js": "^6.3.0",
-    "protobufjs": "github:iFwu/protobuf.js"
+    "pg": "^8.5.1",
+    "protobufjs": "github:iFwu/protobuf.js",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.31"
   }
 }
