@@ -25,42 +25,73 @@ beforeAll(async () => {
 })
 
 // ランダム文字列
-let id:string = ""
+let id: string = ""
 const title = Math.random().toString(32).substring(2)
 const content = Math.random().toString(32).substring(2)
 const user = 'te_twin'
 
-test('greeting success', (done) => {
-  const publishedAt = ""
-  client.addInformation({ user,title,content,publishedAt }, (err, res) => {
+test('お知らせがDBに登録できるか', (done) => {
+  const publishedAt = "2019-10-14 1:54:45"
+  client.addInformation({ user, title, content, publishedAt }, (err, res) => {
     expect(err).toBeNull()
     done()
   })
 })
 
-test('greeting success', (done) => {
-  const limit = 1;
-  client.getInformation({limit}, (err, res) => {
+test('未来のお知らせがDBに登録できるか', (done) => {
+  const publishedAt = "2125-10-14 1:54:45"
+  client.addInformation({ user, title, content, publishedAt }, (err, res) => {
     expect(err).toBeNull()
-    console.log(res);
     done()
   })
 })
-test('greeting success', (done) => {
-  client.adminListInformation({user}, (err, res) => {
-    id = res?.Informations[0].id!;
-    expect(err).toBeNull()
+
+test('DBに登録したお知らせが未来公開分以外すべて読み込めるか', (done) => {
+  client.listInformation({ }, (err, res) => {
     expect(res?.Informations[0].title).toEqual(title)
     expect(res?.Informations[0].content).toEqual(content)
     done()
   })
 })
 
-test('greeting success', (done) => {
-  client.removeInformation({user,id}, (err, res) => {
+
+
+test('DBに登録したお知らせが指定した数読み込めるか', (done) => {
+  const limit = 1;
+  client.getInformation({ limit }, (err, res) => {
     expect(err).toBeNull()
+    expect(res?.Informations.length).toEqual(limit)
+    expect(res?.Informations[0].title).toEqual(title)
+    expect(res?.Informations[0].content).toEqual(content)
+    expect(res?.Informations.length).toEqual(1)
     done()
   })
 })
 
+test('DBに登録したお知らせが未来のも含めて読み込めるか', (done) => {
+  client.adminListInformation({ user }, (err, res) => {
+    id = res?.Informations[0].id!;
+    expect(err).toBeNull()
+    expect(res?.Informations.length).toEqual(2)
+    expect(res?.Informations[0].title).toEqual(title)
+    expect(res?.Informations[0].content).toEqual(content)
+    expect(res?.Informations[1].title).toEqual(title)
+    expect(res?.Informations[1].content).toEqual(content)
+    done()
+  })
+})
+
+test('指定したIDのお知らせを消去できるか', (done) => {
+  client.removeInformation({ user, id }, (err, res) => {
+    expect(err).toBeNull()
+    done()
+  })
+})
+test('正しく消去できているか', (done) => {
+  client.adminListInformation({ user }, (err, res) => {
+    expect(err).toBeNull()
+    expect(res?.Informations.length).toEqual(1)
+    done()
+  })
+})
 afterAll(stopGrpcServer)
