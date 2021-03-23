@@ -16,7 +16,7 @@ import {
   adminListInfoUseCase,
 } from '../usecase/getInfo'
 import { removeInfoUseCase } from '../usecase/removeInfo'
-import { information as DBInformation } from '../database/model/info'
+import { Information as DBInformation } from '../database/model/info'
 import dotenv from 'dotenv'
 dotenv.config()
 
