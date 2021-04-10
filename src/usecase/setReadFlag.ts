@@ -50,9 +50,8 @@ export async function isAlreadyReadUseCase(
     .where('information_id = :information_id', {
       information_id: informationId,
     })
-    // .andWhere('read_user = :user', { user: readUser })
+    .andWhere('read_user = :user', { user: readUser })
     .getMany()
 
-  // console.log(records)
   return records.length > 0
 }
