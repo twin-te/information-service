@@ -5,7 +5,7 @@ import { alreadyReads } from '../database/model/reads'
 /**
  *  お知らせとユーザーを紐付けた既読情報を格納
  */
-export function setReadFlag(informationId: string, user: string) {
+export function setReadFlagUseCase(informationId: string, readUser: string) {
   return getConnection()
     .createQueryBuilder()
     .insert()
@@ -13,7 +13,7 @@ export function setReadFlag(informationId: string, user: string) {
     .values([
       {
         information_id: informationId,
-        read_user: user,
+        read_user: readUser,
         read_at: dayjs().format('YYYY-MM-DD hh:mm:ss'),
       },
     ])
@@ -23,7 +23,7 @@ export function setReadFlag(informationId: string, user: string) {
 /**
  *  ユーザーとお知らせの既読情報を消去
  */
-export async function removeReadFlag(informationId: string, user: string) {
+export async function removeReadFlagUseCase(informationId: string, readUser: string) {
   await getConnection()
     .createQueryBuilder()
     .delete()
@@ -31,20 +31,22 @@ export async function removeReadFlag(informationId: string, user: string) {
     .where('information_id = :information_id', {
       information_id: informationId,
     })
-    .andWhere('user = :user', { user: user })
+    .andWhere('read_user = :user', { user: readUser })
     .execute()
 }
 
 /**
  *  指定したユーザーの指定したお知らせは既読か
  */
-export async function isAlreadyRead(informationId: string, readUser: string) {
+export async function isAlreadyReadUseCase(informationId: string, readUser: string) {
   const records = await getRepository(alreadyReads)
     .createQueryBuilder()
     .where('information_id = :information_id', {
       information_id: informationId,
     })
-    .andWhere('read_user = :user', { user: readUser })
+    // .andWhere('read_user = :user', { user: readUser })
     .getMany()
+
+    console.log(records)
   return records.length > 0
 }

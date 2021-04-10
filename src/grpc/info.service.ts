@@ -10,6 +10,7 @@ import { GrpcServer } from './type'
 import { toGrpcError } from './converter'
 import dayjs, { Dayjs } from 'dayjs'
 import { addInfoUseCase } from '../usecase/addInfo'
+import { isAlreadyReadUseCase,setReadFlagUseCase,removeReadFlagUseCase } from '../usecase/setReadFlag'
 import {
   listInfoUseCase,
   getInfoUseCase,
@@ -18,6 +19,7 @@ import {
 import { removeInfoUseCase } from '../usecase/removeInfo'
 import { Information as DBInformation } from '../database/model/info'
 import dotenv from 'dotenv'
+import e from 'express'
 dotenv.config()
 
 export const infomationService: GrpcServer<InformationService> = {
@@ -45,7 +47,12 @@ export const infomationService: GrpcServer<InformationService> = {
     try {
       const res = new ListInformationResponse()
       const informationList = await listInfoUseCase()
-      res.Informations = informationList.map(convertToGrpcStructure)
+      res.Informations = await Promise.all(
+        informationList.map(convertToGrpcStructure).map(async (e) => {
+          e.read = await isAlreadyReadUseCase(e.id, request.user)
+          return e
+        })
+      )
       callback(null, res)
     } catch (e) {
       callback(toGrpcError(e))
@@ -55,7 +62,12 @@ export const infomationService: GrpcServer<InformationService> = {
     try {
       const res = new GetInformationResponse()
       const informationList = await getInfoUseCase(request.limit)
-      res.Informations = informationList.map(convertToGrpcStructure)
+      res.Informations = await Promise.all(
+        informationList.map(convertToGrpcStructure).map(async (e) => {
+          e.read = await isAlreadyReadUseCase(e.id, request.user)
+          return e
+        })
+      )
       callback(null, res)
     } catch (e) {
       callback(toGrpcError(e))
@@ -86,6 +98,18 @@ export const infomationService: GrpcServer<InformationService> = {
         })
       }
       await removeInfoUseCase(request.id)
+      callback(null)
+    } catch (e) {
+      callback(toGrpcError(e))
+    }
+  },
+  async setReadFlag({ request }, callback) {
+    try {
+      if(request.read){
+        await setReadFlagUseCase (request.id,request.userId)
+      }else{
+        await removeReadFlagUseCase (request.id,request.userId)
+      }
       callback(null)
     } catch (e) {
       callback(toGrpcError(e))

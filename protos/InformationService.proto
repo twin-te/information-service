@@ -6,6 +6,7 @@ service InformationService {
   rpc getInformation(GetInformationRequest) returns (GetInformationResponse);
   rpc adminListInformation(AdminListInformationRequest) returns (AdminListInformationResponse);
   rpc removeInformation(RemoveInformationRequest) returns (RemoveInformationResponse);
+  rpc setReadFlag(SetReadFlagRequest) returns (SetReadFlagResponse);
 }
 
 message AddInformationRequest {
@@ -17,13 +18,16 @@ message AddInformationRequest {
 
 message AddInformationResponse {}
 
-message ListInformationRequest {}
+message ListInformationRequest {
+  string user = 0;
+}
 
 message Information{
     string id = 0;
     string title = 1;
     string content = 2;
     string published_at = 3;
+    bool read = 4;
 }
 
 message ListInformationResponse {
@@ -32,6 +36,7 @@ message ListInformationResponse {
 
 message GetInformationRequest {
   int32 limit = 0;
+  string user = 1;
 }
 
 message GetInformationResponse {
@@ -52,3 +57,11 @@ message RemoveInformationRequest{
 }
 
 message RemoveInformationResponse{}
+
+message SetReadFlagRequest {
+  string id = 1;
+  string userId = 2;
+  bool read = 3;
+}
+
+message SetReadFlagResponse{}
