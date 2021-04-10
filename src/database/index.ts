@@ -1,7 +1,6 @@
 import 'reflect-metadata'
 import { createConnection, getConnection } from 'typeorm'
 import { logger } from '../logger'
-import { Information } from './model/info'
 import { alreadyReads } from './model/reads'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -23,7 +22,7 @@ export async function connectDatabase() {
   const conn = await createConnection({
     type: 'postgres',
     ...config,
-    entities: [Information, alreadyReads],
+    entities: [alreadyReads],
     synchronize: true,
   })
   logger.info('connected to postgres.')

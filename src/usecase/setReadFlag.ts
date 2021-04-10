@@ -23,7 +23,10 @@ export function setReadFlagUseCase(informationId: string, readUser: string) {
 /**
  *  ユーザーとお知らせの既読情報を消去
  */
-export async function removeReadFlagUseCase(informationId: string, readUser: string) {
+export async function removeReadFlagUseCase(
+  informationId: string,
+  readUser: string
+) {
   await getConnection()
     .createQueryBuilder()
     .delete()
@@ -38,7 +41,10 @@ export async function removeReadFlagUseCase(informationId: string, readUser: str
 /**
  *  指定したユーザーの指定したお知らせは既読か
  */
-export async function isAlreadyReadUseCase(informationId: string, readUser: string) {
+export async function isAlreadyReadUseCase(
+  informationId: string,
+  readUser: string
+) {
   const records = await getRepository(alreadyReads)
     .createQueryBuilder()
     .where('information_id = :information_id', {
@@ -47,6 +53,6 @@ export async function isAlreadyReadUseCase(informationId: string, readUser: stri
     // .andWhere('read_user = :user', { user: readUser })
     .getMany()
 
-    console.log(records)
+  // console.log(records)
   return records.length > 0
 }
