@@ -1,54 +1,34 @@
 syntax="proto3";
 
 service InformationService {
-  rpc addInformation(AddInformationRequest) returns (AddInformationResponse);
-  rpc listInformation(ListInformationRequest) returns (ListInformationResponse);
   rpc getInformation(GetInformationRequest) returns (GetInformationResponse);
-  rpc adminListInformation(AdminListInformationRequest) returns (AdminListInformationResponse);
-  rpc removeInformation(RemoveInformationRequest) returns (RemoveInformationResponse);
+  rpc setReadFlag(SetReadFlagRequest) returns (SetReadFlagResponse);
 }
-
-message AddInformationRequest {
-  string user = 0;
-  string title = 1;
-  string content = 2;
-  string published_at = 3;
-}
-
-message AddInformationResponse {}
-
-message ListInformationRequest {}
 
 message Information{
     string id = 0;
     string title = 1;
     string content = 2;
-    string published_at = 3;
+    string publishedAt = 3;
+    bool read = 4;
+    repeated string tag = 5;
 }
 
-message ListInformationResponse {
-  repeated Information Informations = 0;
-}
 
 message GetInformationRequest {
-  int32 limit = 0;
+  optional int32 limit = 0;
+  optional int32 offset = 1;
+  string user = 2;
 }
 
 message GetInformationResponse {
   repeated Information Informations = 0;
 }
 
-message AdminListInformationRequest{
-  string user = 0;
-}
-
-message AdminListInformationResponse{
-  repeated Information Informations = 0;
-}
-
-message RemoveInformationRequest{
-  string user = 0;
+message SetReadFlagRequest {
   string id = 1;
+  string userId = 2;
+  bool read = 3;
 }
 
-message RemoveInformationResponse{}
+message SetReadFlagResponse{}

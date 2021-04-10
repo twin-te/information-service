@@ -1,24 +1,25 @@
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
-@Entity()
-export class Information {
+@Entity({
+  name: 'already_reads',
+})
+export class alreadyReads {
 
     @PrimaryGeneratedColumn("uuid")
     id!: string
 
     @Column({
-      type: "varchar",
+      type: "uuid",
     })
-    title!: string;
+    information_id!: string
 
     @Column({
       type: "text",
     })
-    content!: string;
+    read_user!: string
 
     @Column({
-      type: "timestamp",
-    })
-    published_at!: string;
-
+        type: "timestamp",
+      })
+    read_at!: string
 }
