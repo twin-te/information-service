@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: ghcr.io/twin-te/information-service:main
+        image: ghcr.io/twin-te/information-service:master
         env:
         - name: PG_HOST
           value: postgresql-proxy
