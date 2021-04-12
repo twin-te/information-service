@@ -30,6 +30,6 @@ jobs:
       - 
         name: Deploy
         run: |
-          ./kustomize edit set image ghcr.io/twin-te/information-service:main=ghcr.io/twin-te/information-service:sha-${GITHUB_SHA::7}
+          ./kustomize edit set image ghcr.io/twin-te/information-service:master=ghcr.io/twin-te/information-service:sha-${GITHUB_SHA::7}
           ./kustomize build . | kubectl apply -f -
           kubectl rollout status deploy/information
