@@ -1,22 +1,16 @@
 [
-    {
-        "id": "baa4738b-bf29-4333-9b59-1755a9533411",
-        "tags": [
-            "information",
-            "notification"
-        ],
-        "title": "運営メンバー募集のお知らせ",
-        "content": "この度，Twin:teでは新規運営メンバーを募集することになりました．詳細は<a href=\"https://www.twinte.net/recruit\">こちら</a>をご覧ください．",
-        "publishedAt": "2022-03-03T12:00:00+09:00"
-    },
-    {
-        "id": "82628b0e-8f36-4186-e4e6-5e4d87b4b9c9",
-        "tags": [
-            "information",
-            "notification"
-        ],
-        "title": "プライバシーポリシー改定のお知らせ",
-        "content": "2022年3月3日付で<a href=\"https://www.twinte.net/policy\">プライバシーポリシー</a>を改定いたしましたので，ご確認ください．",
-        "publishedAt": "2022-03-03T12:00:00+09:00"
-    }
+  {
+    "id": "baa4738b-bf29-4333-9b59-1755a9533411",
+    "tags": ["information", "notification"],
+    "title": "運営メンバー募集のお知らせ",
+    "content": "この度，Twin:teでは新規運営メンバーを募集することになりました．詳細は<a href=\"https://www.twinte.net/recruit\">こちら</a>をご覧ください．",
+    "publishedAt": "2022-03-03T12:00:00+09:00"
+  },
+  {
+    "id": "82628b0e-8f36-4186-e4e6-5e4d87b4b9c9",
+    "tags": ["information", "notification"],
+    "title": "プライバシーポリシー改定のお知らせ",
+    "content": "2022年3月3日付で<a href=\"https://www.twinte.net/policy\">プライバシーポリシー</a>を改定いたしましたので，ご確認ください．",
+    "publishedAt": "2022-03-03T12:00:00+09:00"
+  }
 ]

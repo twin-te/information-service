@@ -9,7 +9,8 @@
     "client": "grpcc -i -a localhost:50051 -p protos/InformationService.proto",
     "test": "cross-env LOG_LEVEL=off ADMIN_USER=te_twin jest --runInBand --coverage",
     "build": "rm -rf ./dist && tsc && rm -rf ./dist/__tests__ && mv ./dist/src/* ./dist",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src"
   },
   "devDependencies": {
     "@types/clone": "^2.1.0",

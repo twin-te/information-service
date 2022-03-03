@@ -1,9 +1,6 @@
 import { connectDatabase } from './database'
 import { startGrpcServer } from './grpc'
 import { logger } from './logger'
-import { getInfoUseCase } from './usecase/getInfo'
-
-
 
 async function main() {
   logger.info('starting...')
