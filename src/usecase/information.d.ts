@@ -1,11 +1,14 @@
 declare module '*/information.json' {
   type tag = 'information' | 'notification' | null
 
-  export interface information {
+  interface information {
     id: string
     tags: tag[]
     title: string
     content: string
     publishedAt: string
   }
+
+  const value: information
+  export = value
 }
