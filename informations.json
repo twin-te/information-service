@@ -12,5 +12,12 @@
     "title": "プライバシーポリシー改定のお知らせ",
     "content": "2022年3月3日付で<a href=\"https://www.twinte.net/policy\">プライバシーポリシー</a>を改定いたしましたので，ご確認ください．",
     "publishedAt": "2022-03-03T12:00:00+09:00"
+  },
+  {
+    "id": "556918e8-c91d-0cda-963d-cc831439b705",
+    "tags": ["information", "notification"],
+    "title": "2022年度の時間割",
+    "content": "<a href=\"https://kdb.tsukuba.ac.jp/\">教育課程編成支援システム（KdB）</a>に2022年度の時間割が追加されるまでTwin:teは自動で2022年度の時間割に切り替わらず，2022年度の時間割を検索することもできません．ご了承ください．",
+    "publishedAt": "2022-03-25T12:00:00+09:00"
   }
 ]
